@@ -1,0 +1,66 @@
+<% include adminloginheader %>
+
+
+ <% include adminloginsidebar %>
+
+  <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+		 <div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header"><i class="fa fa-laptop"></i>Stock</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-laptop"></i>Stock</li>	
+					</ol>
+				</div>
+			</div>
+		  <div class="col-md-10">
+		  <div class="row">
+		  	<div class="col-md-12">
+		  		 <% if (errors == ''){ %>
+	          	<div></div>
+	            <% } else { %>
+	           		<div role="alert" class="alert alert-danger"><%= errors %></div>
+	             <% } %>
+		  	</div>
+		  </div>
+		  <div class="row">
+		  	<form action="/admin/stock/<%= currentAdmin.username %>" method="POST" id="signupForm">
+		  	<div class="col-md-4">
+		  		 <div class="form-group">
+		            <input class="form-control" name="name" placeholder="Enter Stock name" type="text">
+		        </div>
+		  	</div>
+			<div class="col-md-4">
+				<div class="form-group">
+		            <input class="form-control" name="value" placeholder="Enter Stock name" type="text">
+		        </div>
+			</div>
+			<div class="col-md-4">
+				 <div class="form-group">
+		            <div class="form-group">
+	                    <button type="submit" class="btn btn-primary">Sign in</button>
+	                </div>
+		        </div>
+			</div>
+	      </form>
+		  </div>
+		  	<div class="row">
+		  	<%for (var stock in stocks){%>
+		  			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<div class="info-box green-bg">
+							<i class="fa fa-cubes"></i>
+							<div class="count">&#8358;<%= stocks[stock].value %></div>
+							<div class="title"><a href="/admin/removestock/<%= currentAdmin.username %>/<%= stocks[stock].name %>" class="btn btn-danger">Remove</a></div>
+							<div class="title"><a href="/admin/stockpending/<%= stocks[stock].name %>" class=" btn btn-info">Pending</a></div>	
+							<div class="title"><a href="/admin/stockconfirm/<%= stocks[stock].name %>" class=" btn btn-success">Confirm</a></div>					
+					</div><!--/.info-box-->	
+				</div><!--/.col-->
+			<%}%>
+		  	</div>
+		  </div>
+		</div>
+    </div>
+
+
+<% include adminloginfooter %>
